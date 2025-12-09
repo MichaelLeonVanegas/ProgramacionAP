@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="Estilo.css">
+    <title>Codigos</title>
+</head>
+
+<body>
+    <h1>Codigos</h1>
+    <h2>Estudiante:</h2>
+    <h3>Michael Andres Leon Vanegas</h3>
+
+    <p><img src="/home/michael/Imágenes/png/Hatsune-Miku-PNG-File.png" alt="TETO"></p>
+    <img src="/home/michael/Imágenes/webp/noFilter.webp" class="imagen-fija">
+
+    <h2>Cod:</h2>
+    <h3>20231005099</h3>
+
+    <h1><a href="https://github.com/MichaelLeonVanegas/ProgramacionAP.git">github</a></h1>
+    <hr>
+
+    <select id="selector" onchange="mostrar_Codigo()">
+        <option value="">Selecciona un archivo</option>
+        <option value="1">Archivo 1 - ListasTuplas</option>
+        <option value="2">Archivo 2 - MiPrimerCodigo</option>
+        <option value="3">Archivo 3 - diccionario</option>
+        <option value="4">Archivo 4 - impares</option>
+        <option value="5">Archivo 5 - primos</option>
+    </select>
+
+    <div id="codigo_seccion">
+        <pre><code id="codigo_texto"></code></pre>
+    </div>
+
+</body>
+
+<script>
+async function mostrar_Codigo() {
+
+    const urls = {
+      "1": "https://raw.githubusercontent.com/MichaelLeonVanegas/ProgramacionAP/main/Corte_1/Abordaje_Secuancial/ListasTuplas.py",
+      "2": "https://raw.githubusercontent.com/MichaelLeonVanegas/ProgramacionAP/main/Corte_1/Abordaje_Secuancial/MiPrimerCodigo.py",
+      "3": "https://raw.githubusercontent.com/MichaelLeonVanegas/ProgramacionAP/main/Corte_1/Abordaje_Secuancial/diccionario.py",
+      "4": "https://raw.githubusercontent.com/MichaelLeonVanegas/ProgramacionAP/main/Corte_1/Abordaje_Secuancial/impares.py",
+      "5": "https://raw.githubusercontent.com/MichaelLeonVanegas/ProgramacionAP/main/Corte_1/Abordaje_Secuancial/primos.py"
+  };
+
+
+    const opcion = document.getElementById("selector").value;
+    const destino = document.getElementById("codigo_seccion");
+
+    if (opcion === "") {
+        destino.innerHTML = "<p>Selecciona un archivo para ver el contenido.</p>";
+        return;
+    }
+
+    destino.innerHTML = "<p>Cargando código...</p>";
+
+    try {
+        const respuesta = await fetch(urls[opcion]);
+        const texto = await respuesta.text();
+        destino.innerHTML = `<pre><code>${texto}</code></pre>`;
+    } catch (error) {
+        destino.innerHTML = "<p>No se pudo cargar el archivo.</p>";
+    }
+}
+</script>
+
+
+</html>
